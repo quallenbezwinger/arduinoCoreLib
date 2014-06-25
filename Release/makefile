@@ -46,38 +46,38 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 LSS += \
-libArduinoCore.lss \
+libarduinoCoreLib.lss \
 
 SIZEDUMMY += \
 sizedummy \
 
 
 # All Target
-all: libArduinoCore.a secondary-outputs
+all: libarduinoCoreLib.a secondary-outputs
 
 # Tool invocations
-libArduinoCore.a: $(OBJS)
+libarduinoCoreLib.a: $(OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR Archiver'
-	avr-ar -r  "libArduinoCore.a" $(OBJS) $(LIBS)
+	avr-ar -r  "libarduinoCoreLib.a" $(OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-libArduinoCore.lss: libArduinoCore.a
+libarduinoCoreLib.lss: libarduinoCoreLib.a
 	@echo 'Invoking: AVR Create Extended Listing'
-	-avr-objdump -h -S libArduinoCore.a  >"libArduinoCore.lss"
+	-avr-objdump -h -S libarduinoCoreLib.a  >"libarduinoCoreLib.lss"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-sizedummy: libArduinoCore.a
+sizedummy: libarduinoCoreLib.a
 	@echo 'Invoking: Print Size'
-	-avr-size --format=avr --mcu=atmega328p libArduinoCore.a
+	-avr-size --format=avr --mcu=atmega328p libarduinoCoreLib.a
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C_UPPER_DEPS)$(ARCHIVES)$(S_DEPS)$(LSS)$(C_DEPS)$(CC_DEPS)$(C++_DEPS)$(OBJS)$(CXX_DEPS)$(ASM_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(CPP_DEPS) libArduinoCore.a
+	-$(RM) $(C_UPPER_DEPS)$(ARCHIVES)$(S_DEPS)$(LSS)$(C_DEPS)$(CC_DEPS)$(C++_DEPS)$(OBJS)$(CXX_DEPS)$(ASM_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(CPP_DEPS) libarduinoCoreLib.a
 	-@echo ' '
 
 secondary-outputs: $(LSS) $(SIZEDUMMY)
